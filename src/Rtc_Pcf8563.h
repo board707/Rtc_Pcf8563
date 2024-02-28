@@ -46,7 +46,7 @@
 #define Rtc_Pcf8563_H
 
 #include "Arduino.h"
-//#include <SoftWire.h>
+#include <Wire.h>
 
 #define RTCC_VERSION  "Pcf8563 v1.0.3"
 
@@ -102,7 +102,7 @@
 #define SQW_1024HZ      B10000001
 #define SQW_32HZ        B10000010
 #define SQW_1HZ         B10000011
-#include <Wire.h>
+
 
 /* arduino class */
 class Rtc_Pcf8563 {
@@ -110,7 +110,7 @@ class Rtc_Pcf8563 {
         Rtc_Pcf8563(WireBase &wire);
         Rtc_Pcf8563();
 
-        uint8_t initClock();   /* zero out all values, disable all alarms */
+        void initClock();   /* zero out all values, disable all alarms */
         void clearStatus(); /* set both status bytes to zero */
 
         void getDate();         /* get date vals to local vars */
@@ -178,5 +178,5 @@ class Rtc_Pcf8563 {
         WireBase &WW;
         int Rtcc_Addr;
 };
-//extern SoftWire Wire;
+
 #endif

@@ -40,7 +40,7 @@ void setup()
   while (!Serial);
 
   //clear out the registers
-  //uint8_t error = rtc.initClock();
+  //rtc.initClock();
 
   // we need an explicit i2c bus initialization on STM32 platform
   SWire.begin();

@@ -61,14 +61,11 @@
 
 
 #include "Rtc_Pcf8563.h"
-//SoftWire Wire(PA8, PA1);
 
 Rtc_Pcf8563::Rtc_Pcf8563(WireBase &wire):WW(wire)
 {
     WW.begin();
-    //Rtcc_Addr = RTCC_R>>1;
-      Rtcc_Addr = 0x51;
-     
+    Rtcc_Addr = RTCC_R>>1;
 }
 
 Rtc_Pcf8563::Rtc_Pcf8563() :Rtc_Pcf8563(Wire) {};
@@ -76,7 +73,7 @@ Rtc_Pcf8563::Rtc_Pcf8563() :Rtc_Pcf8563(Wire) {};
 uint8_t Rtc_Pcf8563::initClock()
 {     
   WW.beginTransmission(Rtcc_Addr);    // Issue I2C start signal
-  /*Wire.send(0x0);       // start address
+  WW.send(0x0);       // start address
     
   WW.send(0x0);   //control/status1
   WW.send(0x0);   //control/status2
@@ -92,8 +89,8 @@ uint8_t Rtc_Pcf8563::initClock()
   WW.send(0x80);  //day alarm value reset to 00
   WW.send(0x80);  //weekday alarm value reset to 00
   WW.send(0x0);   //set SQW, see: setSquareWave
-  WW.send(0x0);   //timer off*/
-  return WW.endTransmission();
+  WW.send(0x0);   //timer off
+  WW.endTransmission();
   
 }
 
@@ -377,7 +374,6 @@ void Rtc_Pcf8563::getTime()
     status2 = WW.receive();
     //0x7f = 0b01111111
     sec = bcdToDec(WW.receive() & 0x7f);
-    //sec = bcdToDec(WW.receive());
     minute = bcdToDec(WW.receive() & 0x7f);
     //0x3f = 0b00111111
     hour = bcdToDec(WW.receive() & 0x3f);
