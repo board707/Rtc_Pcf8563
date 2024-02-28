@@ -70,7 +70,7 @@ Rtc_Pcf8563::Rtc_Pcf8563(WireBase &wire):WW(wire)
 
 Rtc_Pcf8563::Rtc_Pcf8563() :Rtc_Pcf8563(Wire) {};
 
-uint8_t Rtc_Pcf8563::initClock()
+void Rtc_Pcf8563::initClock()
 {     
   WW.beginTransmission(Rtcc_Addr);    // Issue I2C start signal
   WW.send(0x0);       // start address
